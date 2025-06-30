@@ -5,7 +5,7 @@ export const Navbar = () => {
         <header className="bg-blue-950 shadow-md">
             <div className="container mx-auto flex items-center justify-between px-4 py-3">
                 <div className="flex items-center space-x-3">
-                    <span class="material-symbols-outlined text-amber-50">
+                    <span className="material-symbols-outlined text-amber-50">
                         crossword
                     </span>
                     <h1 className="text-xl font-bold text-yellow-50">
