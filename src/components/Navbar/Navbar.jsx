@@ -18,6 +18,9 @@ export const Navbar = () => {
                         <li>
                             <Link to="/" className="hover:text-blue-600">Home</Link>
                         </li>
+                        <li>
+                            <Link to="/auth/login" className="hover:text-blue-600">Login</Link>
+                        </li>
                     </ul>
                 </nav>
             </div>
