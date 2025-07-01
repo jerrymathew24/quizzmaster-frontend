@@ -2,16 +2,17 @@ import { createContext, useContext, useReducer } from "react";
 import { authReducer } from "../reducer/auth-reducer";
 
 const initialState = {
-  userName: "jerry",
-  password: "12345",
+  userName: "",
+  password: "",
+  token: ""
 };
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [{ userName, password }, authDispatch] = useReducer(authReducer, initialState);
+  const [{ userName, password, token }, authDispatch] = useReducer(authReducer, initialState);
   return (
-    <AuthContext.Provider value={{ userName, password, authDispatch }}>
+    <AuthContext.Provider value={{ userName, password, token, authDispatch }}>
       {children}
     </AuthContext.Provider>
   );

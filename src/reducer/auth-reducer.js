@@ -10,6 +10,17 @@ export const authReducer = (state, { type, payload }) => {
         ...state,
         password: payload,
       };
+    case "CLEAR_CREDENTIALS":
+      return {
+        ...state,
+        userName: "",
+        password: "",
+      };
+    case "TOKEN":
+      return {
+       ...state,
+       token: payload
+      }
     default:
       return state;
   }
