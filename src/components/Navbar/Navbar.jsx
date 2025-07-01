@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+
+    const navigate = useNavigate()
+
+    const token = localStorage.getItem("token")
+
+    const onAuthClick =()=>{
+        if(token){
+            localStorage.clear()
+        }
+        navigate("/auth/login")
+    }
+
     return (
         <header className="bg-blue-950 shadow-md">
             <div className="container mx-auto flex items-center justify-between px-4 py-3">
@@ -19,7 +31,7 @@ export const Navbar = () => {
                             <Link to="/" className="hover:text-blue-600">Home</Link>
                         </li>
                         <li>
-                            <Link to="/auth/login" className="hover:text-blue-600">Login</Link>
+                            <Link to="/auth/login" className="hover:text-blue-600" onClick={onAuthClick}>  {token ? "Logout" : "Login"}</Link>
                         </li>
                     </ul>
                 </nav>

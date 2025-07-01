@@ -1,5 +1,21 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth-context"
+
 export const QuizCard = ({ category }) => {
+    const navigate = useNavigate()
+    const { token } = useAuth()
+
     const { title, description, image } = category;
+
+    const onPlayNowClick = () => {
+        if (token) {
+            navigate("/quiz")
+        } else {
+            navigate("/auth/login")
+        }
+    }
+
+
     return (
         <div className="bg-blue-950 text-white rounded-2xl shadow-lg p-4 max-w-sm w-full hover:shadow-xl transition-shadow duration-300">
             <div className="flex items-center gap-4">
@@ -12,7 +28,7 @@ export const QuizCard = ({ category }) => {
                 </div>
             </div>
             <div className="mt-4 text-right">
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold">
+                <button onClick={onPlayNowClick} className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold">
                     PLAY NOW
                 </button>
             </div>
