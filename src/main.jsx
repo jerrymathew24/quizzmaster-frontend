@@ -1,16 +1,16 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/auth-context.jsx'
+import { QuizProvider } from './context/quiz-context.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <BrowserRouter>
       <AuthProvider >
-        <App />
+        <QuizProvider>
+          <App />
+        </QuizProvider>
       </AuthProvider>
     </BrowserRouter>
-  </StrictMode>
 )
