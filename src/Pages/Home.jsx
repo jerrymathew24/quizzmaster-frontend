@@ -6,8 +6,6 @@ import { QuizCard } from "../components/QuizCard/QuizCard";
 export const Home = () => {
   const [categories, setCategories] = useState([]);
 
-  // Fetch categories from the API
-
   useEffect(() => {
     (async () => {
       try {
@@ -27,7 +25,7 @@ export const Home = () => {
       <Navbar />
       <main className=" bg-blue-800 min-h-screen p-4 flex flex-col items-center gap-4">
         {categories.map((category) => (
-          <QuizCard key={category.id} category={category} />
+          <QuizCard key={category.id} quizCategory={category} />
         ))}
       </main>
     </Fragment>

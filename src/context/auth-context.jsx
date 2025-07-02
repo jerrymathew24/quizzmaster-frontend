@@ -4,7 +4,8 @@ import { authReducer } from "../reducer/auth-reducer";
 const initialState = {
   userName: "",
   password: "",
-  token: ""
+  token: "",
+  quizCategory: ""
 };
 
 const AuthContext = createContext();
@@ -17,9 +18,9 @@ const AuthProvider = ({ children }) => {
       payload: token
     })
   }, [])
-  const [{ userName, password, token }, authDispatch] = useReducer(authReducer, initialState);
+  const [{ userName, password, token, quizCategory }, authDispatch] = useReducer(authReducer, initialState);
   return (
-    <AuthContext.Provider value={{ userName, password, token, authDispatch }}>
+    <AuthContext.Provider value={{ userName, password, token,quizCategory, authDispatch }}>
       {children}
     </AuthContext.Provider>
   );
