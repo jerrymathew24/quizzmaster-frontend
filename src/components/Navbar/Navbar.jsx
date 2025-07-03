@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({ route }) => {
 
     const navigate = useNavigate()
 
     const token = localStorage.getItem("token")
 
-    const onAuthClick =()=>{
-        if(token){
+    const onAuthClick = () => {
+        if (token) {
             localStorage.clear()
         }
         navigate("/auth/login")
@@ -21,18 +21,37 @@ export const Navbar = () => {
                         crossword
                     </span>
                     <h1 className="text-xl font-bold text-yellow-50">
-                        <Link to="/">Quiz Master</Link>
+                        {
+                            route === "home" ? (
+
+                                <Link to="/">Quiz Master</Link>
+                            ) : "Quiz Master"
+                        }
                     </h1>
                 </div>
 
                 <nav>
                     <ul className="flex space-x-6 text-amber-50 font-medium">
-                        <li>
-                            <Link to="/" className="hover:text-blue-600">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/auth/login" className="hover:text-blue-600" onClick={onAuthClick}>  {token ? "Logout" : "Login"}</Link>
-                        </li>
+                        {
+                            route === "home" || route === "login" ? (
+                                <li>
+                                    <Link to="/auth/login" className="hover:text-blue-600" onClick={onAuthClick}>  {token ? "Logout" : "Login"}</Link>
+                                </li>) : ""
+                        }
+
+                        {
+                            route === "result" && (
+                                <> 
+                                    <li>
+                                        <Link to="/" className="hover:text-blue-600">Home</Link>
+                                    </li>
+                                    <li>
+                                        <span className="hover:text-blue-600">Logout</span>
+                                    </li>
+                                </>
+                            )
+                        }
+
                     </ul>
                 </nav>
             </div>

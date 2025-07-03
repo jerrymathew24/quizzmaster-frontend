@@ -36,7 +36,7 @@ export const Quiz = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar route="quiz" />
       <main className="w-fit mx-auto">
         {
           quiz && quiz.length > 0 && <QuestionAndOptions quizData={quiz} />

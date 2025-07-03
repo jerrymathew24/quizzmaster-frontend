@@ -5,7 +5,7 @@ import { Navbar } from "../components/Navbar/Navbar";
 export const Login = () => {
   return (
     <Fragment>
-      <Navbar />
+      <Navbar route="login" />
       <main className="bg-blue-800 items-center">
         <AuthLogin />
       </main>

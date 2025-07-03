@@ -22,7 +22,7 @@ export const Home = () => {
   }, []);
   return (
     <Fragment>
-      <Navbar />
+      <Navbar route="home" />
       <main className=" bg-blue-800 min-h-screen p-4 flex flex-col items-center gap-4">
         {categories.map((category) => (
           <QuizCard key={category.id} quizCategory={category} />
