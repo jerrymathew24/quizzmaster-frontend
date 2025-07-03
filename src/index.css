@@ -1,4 +1,7 @@
 @import "tailwindcss";
+
 body {
   background-color: rgba(6, 6, 170, 0.8);
+  font-family: 'Raleway', sans-serif;
+
 }
