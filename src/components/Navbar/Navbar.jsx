@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useQuiz } from "../../context/quiz-context";
 
 export const Navbar = ({ route }) => {
 
@@ -6,11 +7,22 @@ export const Navbar = ({ route }) => {
 
     const token = localStorage.getItem("token")
 
+    const { quizDispatch } = useQuiz()
+
     const onAuthClick = () => {
         if (token) {
             localStorage.clear()
+            quizDispatch({
+                type: "QUIT"
+            })
         }
-        navigate("/auth/login")
+        navigate("/")
+    }
+
+    const onEndGameClick = () => {
+        quizDispatch({
+            type: "QUIT"
+        })
     }
 
     return (
@@ -41,12 +53,12 @@ export const Navbar = ({ route }) => {
 
                         {
                             route === "result" && (
-                                <> 
+                                <>
                                     <li>
-                                        <Link to="/" className="hover:text-blue-600">Home</Link>
+                                        <Link to="/" onClick={onEndGameClick} className="hover:text-blue-600">Home</Link>
                                     </li>
                                     <li>
-                                        <span className="hover:text-blue-600">Logout</span>
+                                        <Link to="/" onClick={onAuthClick} className="hover:text-blue-600">Logout</Link>
                                     </li>
                                 </>
                             )

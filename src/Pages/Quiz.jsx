@@ -1,18 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Navbar } from "../components/Navbar/Navbar";
 import { QuestionAndOptions } from "../components/QuestionAndOptions/QuestionAndOptions";
 import axios from "axios";
 import { useQuiz } from "../context/quiz-context";
 
 export const Quiz = () => {
-  const [quiz, setQuiz] = useState([]);
-  const { quizCategory } = useQuiz()
-  console.log("==================================");
-
-
-  console.log(quizCategory, ":: quizcategory");
-
-
+  const { quizCategory, quiz, quizDispatch } = useQuiz()
 
 
   useEffect(() => {
@@ -23,11 +16,14 @@ export const Quiz = () => {
             headers: { authorization: localStorage.getItem("token") }
           }
         );
-        console.log(data, "::data");
         const filteredData = data.filter(({ category }) => category === quizCategory)
-        setQuiz(filteredData);
-        console.log(filteredData, ":: filtered data");
-
+        if (filteredData && filteredData.length > 0) {
+          quizDispatch({
+            type: "SET_QUIZ",
+            payload: filteredData
+          })
+          localStorage.setItem("quiz",JSON.stringify(filteredData))
+        }
       } catch (error) {
         console.log(error);
       }

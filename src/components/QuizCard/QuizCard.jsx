@@ -1,13 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/auth-context"
 import { useQuiz } from "../../context/quiz-context";
 
 export const QuizCard = ({ quizCategory }) => {
     const navigate = useNavigate()
-    const { token } = useAuth()
     const {quizDispatch} = useQuiz()
-
     const { title, description, image, category } = quizCategory;
+    const token = localStorage.getItem("token")
 
     const onPlayNowClick = () => {
         if (token) {
@@ -15,6 +13,7 @@ export const QuizCard = ({ quizCategory }) => {
                 type:"CATEGORY",
                 payload:category
             })
+            localStorage.setItem("category", category)
             navigate("/quiz")
         }
         

@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useQuiz } from "../../context/quiz-context"
 import { useNavigate } from "react-router-dom"
 
@@ -12,6 +13,7 @@ export const QuestionAndOptions = ({ quizData }) => {
     const { index, score, selectedOption, quizDispatch } = useQuiz()
 
     const onNextQuestionClick = () => {
+        localStorage.setItem("index",index+1)
         if (index !== quizz.length - 1) {
             quizDispatch({
                 type: "NEXT_QUESTION"
@@ -38,22 +40,27 @@ export const QuestionAndOptions = ({ quizData }) => {
         navigate("/")
     }
 
+    useEffect(()=>{
+        localStorage.setItem("option", selectedOption)
+        localStorage.setItem("score", score)
+    },[selectedOption])
+
     return (
         <div className="bg-blue-950 text-white p-5 px-14 rounded-2xl max-w-xl shadow-lg mt-3">
             <div className="flex justify-between items-center mb-2 text-sm">
                 <span className="text-xl font-bold mx-auto text-center">{title}</span>
             </div>
             <div className="flex justify-between">
-                <span className="">Question {index + 1}/{quizz.length}</span>
+                <span className="">Question {index + 1}/{quizz?.length}</span>
                 <span className="">Score: {score}</span>
             </div>
             <p className="mb-3 font-normal">
-                Q{index + 1}: {quizz[index].question}
+                Q{index + 1}: {quizz[index]?.question}
             </p>
             <div className="grid gap-2">
                 {
-                    quizz[index].options.map(({ id, option, isCorrect }) =>
-                        <button key={id} className={`w-full px-4 py-2 border-none rounded-4xl focus:outline-none  mx-auto text-center  bg-blue-900 hover:bg-blue-800 ${selectedOption && isCorrect ? "bg-green-600" : ""} ${selectedOption === id && !isCorrect ? "bg-red-600" : ""}`}
+                    quizz[index]?.options.map(({ id, option, isCorrect }) =>
+                        <button key={id} className={`w-full px-4 py-2 border-none rounded-4xl focus:outline-none  mx-auto text-center  bg-blue-900 hover:bg-blue-800 ${selectedOption && isCorrect ? "bg-green-600" : ""} ${selectedOption &&selectedOption === id && !isCorrect ? "bg-red-600" : ""}`}
                             onClick={() => onOptionClick(id, isCorrect)}
                             disabled={selectedOption}
                         >
