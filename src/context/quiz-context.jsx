@@ -5,15 +5,16 @@ import { quizReducer } from "../reducer/quiz-reducer";
 const initialState = {
     index: 0,
     score: 0,
-    quizCategory:""
+    quizCategory: "",
+    selectedOption: ""
 };
 
 const QuizContext = createContext();
 
 const QuizProvider = ({ children }) => {
-    const [{ index, score, quizCategory }, quizDispatch] = useReducer(quizReducer, initialState);
+    const [{ index, score, quizCategory, selectedOption }, quizDispatch] = useReducer(quizReducer, initialState);
     return (
-        <QuizContext.Provider value={{ index, score, quizCategory, quizDispatch }}>
+        <QuizContext.Provider value={{ index, score, quizCategory, selectedOption, quizDispatch }}>
             {children}
         </QuizContext.Provider>
     )

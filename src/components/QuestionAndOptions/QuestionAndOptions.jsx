@@ -9,7 +9,7 @@ export const QuestionAndOptions = ({ quizData }) => {
 
     const { title, quizz } = currentQuiz
 
-    const { index, score, quizDispatch } = useQuiz()
+    const { index, score, selectedOption, quizDispatch } = useQuiz()
 
     const onNextQuestionClick = () => {
         if (index !== quizz.length - 1) {
@@ -22,6 +22,20 @@ export const QuestionAndOptions = ({ quizData }) => {
             })
             navigate("/result")
         }
+    }
+
+    const onOptionClick = (optionId, isCorrect) => {
+        quizDispatch({
+            type: "SET_SELECTED_OPTION",
+            payload: { optionId, isCorrect }
+        })
+    }
+
+    const onQuitClick = () => {
+        quizDispatch({
+            type:"QUIT"
+        })
+        navigate("/")
     }
 
     return (
@@ -39,14 +53,17 @@ export const QuestionAndOptions = ({ quizData }) => {
             <div className="grid gap-2">
                 {
                     quizz[index].options.map(({ id, option, isCorrect }) =>
-                        <button key={id} className="w-full px-4 py-2 border-none rounded-4xl focus:outline-none  mx-auto text-center  bg-blue-900 hover:bg-blue-800">
+                        <button key={id} className={`w-full px-4 py-2 border-none rounded-4xl focus:outline-none  mx-auto text-center  bg-blue-900 hover:bg-blue-800 ${selectedOption && isCorrect ? "bg-green-600" : ""} ${selectedOption === id && !isCorrect ? "bg-red-600" : ""}`}
+                            onClick={() => onOptionClick(id, isCorrect)}
+                            disabled={selectedOption}
+                        >
                             {option}
                         </button>
                     )
                 }
             </div>
             <div className="flex mt-4">
-                <button className="px-4 py-1 mx-2 hover:bg-blue-900 focus:outline-none">
+                <button className="px-4 py-1 mx-2 hover:bg-blue-900 focus:outline-none" onClick={onQuitClick} >
                     Quit
                 </button>
                 <button onClick={onNextQuestionClick} className="px-4 py-1 bg-blue-900 hover:bg-blue-800">
