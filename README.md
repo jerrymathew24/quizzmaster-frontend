@@ -1,6 +1,3 @@
-Here's a **descriptive overview of your full-stack Quiz Master App** — written in a way that clearly explains what the app does, how it works, and the user experience, aimed at both technical and non-technical readers:
-
----
 
 ## 🎓 **Quiz Master – A Full-Stack Quiz Application**
 
