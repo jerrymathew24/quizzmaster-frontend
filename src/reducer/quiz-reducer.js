@@ -6,7 +6,8 @@ export const quizReducer = (state, { type, payload }) => {
         index:payload.currentIndex,
         score:payload.currentScore,
         selectedOption:payload.currentOption === "null" ? null : payload.currentOption,
-        quizCategory:payload.currentCategory
+        quizCategory:payload.currentCategory,
+        quiz:payload.currentQuiz
       }
       case "SET_QUIZ":
         return{

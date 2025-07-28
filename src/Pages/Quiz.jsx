@@ -22,7 +22,7 @@ export const Quiz = () => {
             type: "SET_QUIZ",
             payload: filteredData
           })
-          localStorage.setItem("quiz",JSON.stringify(filteredData))
+          localStorage.setItem("quiz", JSON.stringify(filteredData))
         }
       } catch (error) {
         console.log(error);
